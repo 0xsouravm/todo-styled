@@ -97,7 +97,6 @@
                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
             </svg>
             </button>
-        {% include 'modals.html' %}
             <a href="{% url 'remove' id=tasks.id %}" class="classmar"  style="color: gray;" data-bs-toggle="popover" data-bs-trigger="hover" title="Remove Task" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
@@ -116,10 +115,33 @@
             </div>
         </div>
     </li>
+    {% include 'modals.html' %}
     {% endfor %}
 </ol>
 <hr>
 <button class="button" data-bs-toggle="modal" data-bs-target="#taskentermodal">+ NEW TASK</button>
+<div class="modal fade" id="taskentermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'addtask' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">New Task:</label>
+              <input class="form-control" id="message-text" style="border-radius: 20px; border-color: purple; height: 50px;" placeholder="Write New Task" aria-label="With textarea" name="task_added" ></input>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-secondary" style="border-radius: 0px;">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
