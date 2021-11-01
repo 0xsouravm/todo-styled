@@ -106,7 +106,7 @@
             {% if tasks.is_complete %}
             <a href="{% url 'finishtoggle' id=tasks.id %}" class="classmar" style="color: rgb(61, 214, 61);" data-bs-toggle="popover" data-bs-trigger="hover" title="Renew Task">
             {% else %}
-            <a href="{% url 'finishtoggle' id=tasks.id %}" class="classmar" style="color: rgb(173, 173, 173);" data-bs-toggle="popover" data-bs-trigger="hover" title="Task Complete">
+            <a href="{% url 'finishtoggle' id=tasks.id %}" class="classmar" style="color: red;" data-bs-toggle="popover" data-bs-trigger="hover" title="Task Complete">
             {% endif %}
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
