@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    .marwidbox{
+        margin-top: 1%;
+        width: 60%;
+        border-radius: 50px;
+        border-style: solid;
+        border-color: coral;
+        padding: 50px 50px;
+    } 
+
+    #finished{
+        color: gray;
+        opacity: 0.5;
+    }
+
+    .classmar{
+        margin-left: 11px;
+        margin-right: 11px;
+    }
+
+    .onlyright{
+        margin-left: 12px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    .title-todo{
+        font-style: Orbitron;
+        color: white;
+        font-size: 100px;
+        -webkit-text-stroke: purple;
+        -webkit-text-stroke-width: 1.5px;
+        font-family: 'Orbitron', sans-serif;
+        transition-duration: 1s;
+        width: 100%;
+        margin-bottom: -5%;
+        margin-top: -5%;
+    }  
+    
+    .title-todo:hover{
+        color:coral;
+        -webkit-text-stroke: purple;
+        -webkit-text-stroke-width: 1.5px;
+    }
+
+    .button {
+        background-color: white;
+        border: none;
+        color: purple;
+        padding: 10px 0px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-bottom: -11.5%;
+        border-radius: 20px;
+        border-color: coral;
+        border-style: solid;
+        width: 17%;
+    }
+
+    .bord{
+        border-radius: 20px; 
+        border-color: purple;
+        margin-right: 10px;
+        height: 50px;
+        transition-duration: .5s;
+    }
+
+    .bord:hover{
+        box-shadow: 1px 1px 1px rgb(143, 90, 143);
+    }
+
+</style>        
+<div class="container marwidbox">
+<center>
+    <p class="title-todo">TO-DO</p>
+</center>
+<hr>
+<ul class="list-group">
+    {% for tasks in task_list %}
+    <li class="list-group-item" style="border-radius: 20px; border-color: purple;">
+        <div class="row">
+            {% if tasks.is_complete and  tasks.is_complete%}
+                <div class="col-8"><p id="finished" style="text-decoration: line-through; font-style: italic;">{{ tasks.task }}</p></div> 
+            {% else %}
+                <div class="col-8"><p>{{ tasks.task }}</p></div>
+            {% endif %}
+            <div class="col-4">
+            <button type="button" class="btn onlyright" data-bs-toggle="modal" data-bs-target="#showmodal">  
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+            </svg>
+            </button>
+        {% include 'modals.html' %}
+            <a href="{% url 'remove' id=tasks.id %}" class="classmar"  style="color: gray;" data-bs-toggle="popover" data-bs-trigger="hover" title="Remove Task" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                </svg>
+            </a>
+            {% if tasks.is_complete %}
+            <a href="{% url 'finishtoggle' id=tasks.id %}" class="classmar" style="color: rgb(61, 214, 61);" data-bs-toggle="popover" data-bs-trigger="hover" title="Renew Task">
+            {% else %}
+            <a href="{% url 'finishtoggle' id=tasks.id %}" class="classmar" style="color: rgb(173, 173, 173);" data-bs-toggle="popover" data-bs-trigger="hover" title="Task Complete">
+            {% endif %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            </svg>
+            </a>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+<hr>
+<button class="button" data-bs-toggle="modal" data-bs-target="#taskentermodal">+ NEW TASK</button>
+</div>
+
+{% endblock %}
