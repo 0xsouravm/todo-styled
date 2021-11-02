@@ -1,22 +1,22 @@
-<div class="modal fade" id="showmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modify Task</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'modifytask' id=tasks.id %}" method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-              <label for="message-text" class="col-form-label">Modified Task:</label>
-              <input class="form-control" id="message-text" name="modified" style="border-radius: 20px; border-color: purple; height: 50px;"></input>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-secondary" style="border-radius: 0px;">Update</button>
-            </div>
-          </form>
-        </div>
+<div class="modal fade" id="modal{{ task.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modify Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'modifytask' id=task.id %}" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">New Task:</label>
+            <input class="form-control" id="message-text" name="modified" style="border-radius: 20px; border-color: purple; height: 50px;" value="{{task.task}}"></input>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-dark" style="border-radius: 0px;">Update</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
